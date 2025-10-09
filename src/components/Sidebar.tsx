@@ -20,7 +20,7 @@ export default function Sidebar() {
           Create Content
         </Link>
         <Link
-          href="/dashboard/blog"
+          href="/blog"
           className="p-2 rounded hover:shadow hover:bg-slate-500 hover:text-white"
         >
           Blogs

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -55,6 +56,58 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section
+        className="relative py-20 px-6 md:px-16 text-gray-700"
+        style={{ backgroundImage: "url('/profilebg.jpg')" }}
+      >
+        <div className="max-w-4xl mx-auto text-center  ">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-[#0387fa] mb-6 drop-shadow-sm">
+            Tentang Laboratorium Diatest
+          </h2>
+          <div className="text-lg md:text-xl leading-relaxed">
+            <p>
+              Diatest hadir sebagai sahabat kesehatan Anda — menghadirkan
+              layanan pemeriksaan laboratorium yang cepat, akurat, dan penuh
+              kepedulian. Dikelola oleh tim profesional yang berdedikasi, kami
+              percaya bahwa setiap hasil bukan sekadar angka, melainkan langkah
+              menuju hidup yang lebih sehat dan tenang.
+            </p>
+          </div>
+          <div className="text-lg md:text-xl leading-relaxed">
+            <p>
+              Diatest tumbuh dari budaya kerja yang menjunjung tinggi{" "}
+              <span className="font-semibold text-blue-700">
+                ketelitian, kejujuran, dan empati.
+              </span>{" "}
+              Setiap anggota tim berperan penting dalam menciptakan lingkungan
+              yang harmonis — tempat di mana profesionalisme berpadu dengan rasa
+              peduli.
+            </p>
+            <p className="mt-4">
+              Kami percaya bahwa hasil terbaik lahir dari{" "}
+              <span className="font-semibold text-blue-700">
+                kolaborasi, semangat belajar,
+              </span>{" "}
+              dan komitmen untuk melayani dengan hati. Dengan suasana kerja yang
+              positif dan saling menghargai, Diatest bukan sekadar tempat
+              bekerja, melainkan tempat untuk tumbuh bersama demi menghadirkan
+              layanan kesehatan yang bermakna.
+            </p>
+            <div className="flex flex-col justify-center items-center mt-8">
+              <p className="text-[8px] font-bold mb-2">
+                - Pimpinan Laboratorium Diatest 2025
+              </p>
+              <Image
+                src="/footerlogo.png"
+                alt="logo diatest"
+                width={300}
+                height={200}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         className="relative min-h-screen bg-cover bg-center py-20"
         style={{ backgroundImage: "url('/profilebg.jpg')" }}

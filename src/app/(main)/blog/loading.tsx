@@ -8,9 +8,8 @@ export default function LoadingBlog() {
           key={index}
           className="shadow rounded-lg animate-pulse overflow-hidden"
         >
-          {/* Fake Image */}
           <div className="bg-slate-300 h-48 w-full"></div>
-          {/* Fake Title */}
+
           <div className="h-4 bg-slate-300 rounded w-3/4"></div>
         </div>
       );

@@ -1,4 +1,3 @@
-// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -6,13 +5,11 @@ export function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
   const pathname = req.nextUrl.pathname;
 
-  // baca cookie prototipe
   const token = req.cookies.get("diatest_token")?.value;
 
-  // Protect dashboard and its subpaths
+  // Protect mister dashboard and its gangs
   if (pathname.startsWith("/dashboard")) {
     if (!token) {
-      // Simpan path tujuan (optional) -> bisa digunakan nanti
       url.pathname = "/signin";
       url.searchParams.set("next", pathname);
       return NextResponse.redirect(url);
@@ -22,7 +19,6 @@ export function middleware(req: NextRequest) {
 
   if (pathname.startsWith("/e-result")) {
     if (!token) {
-      // Simpan path tujuan (optional) -> bisa digunakan nanti
       url.pathname = "/signin";
       url.searchParams.set("next", pathname);
       return NextResponse.redirect(url);
@@ -30,7 +26,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Jika sudah login, jangan biarkan buka /signin
+  // kalo udh login, paksa jangan biarkan buka /signin
   if (pathname === "/signin" || pathname === "/signin/") {
     if (token) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
@@ -41,6 +37,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // matcher: dashboard paths + signin (so signin redirect works server-side)
   matcher: ["/dashboard/:path*"],
 };

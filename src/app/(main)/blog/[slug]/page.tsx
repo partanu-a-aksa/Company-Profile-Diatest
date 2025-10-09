@@ -1,22 +1,50 @@
-import { getNewsDetail } from "@/lib/newsapi";
+import { getNewsHeadline, getNewsDetail } from "@/lib/newsapi";
+import Link from "next/link";
 
-export default async function BlogDetail(props: any) {
-  const params = await props.params;
-  const slug = params.slug;
-  const data = await getNewsDetail(slug);
+interface BlogDetailProps {
+  params: { slug: string };
+}
+
+export default async function BlogDetailPage({ params }: BlogDetailProps) {
+  const articles = await getNewsHeadline();
+
+  const article = articles.find(
+    (a) => a.title.toLowerCase().replace(/\s+/g, "-") === params.slug
+  );
+
+  if (!article) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-sky-100">
+        <p className="text-gray-600 text-lg">Artikel tidak ditemukan.</p>
+      </div>
+    );
+  }
+
+  const data = await getNewsDetail(article.objectId);
 
   return (
-    <div>
-      <h2>{data.title}</h2>
-      {data.imgurl && (
-        <img
-          src={data.imgurl}
-          alt={data.title}
-          className="w-full max-w-xl mx-auto my-4 rounded-lg shadow"
-        />
-      )}
-      <p className="text-[8px] italic ">created by : {data.author}</p>
-      <p>{data.content}</p>
+    <div className="min-h-screen bg-sky-100 flex items-center justify-center py-10 px-4">
+      <div className="bg-white shadow-lg rounded-2xl max-w-3xl w-full p-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-sky-700 mb-4">
+          {data.title}
+        </h2>
+
+        {data.imgurl && (
+          <img
+            src={data.imgurl}
+            alt={data.title}
+            className="w-full max-h-[400px] object-cover rounded-xl mb-6 shadow-md"
+          />
+        )}
+
+        <p className="text-xs text-gray-500 italic mb-4 text-right">
+          created by: {data.author}
+        </p>
+
+        <p className="text-gray-700 leading-relaxed text-justify whitespace-pre-line">
+          {data.content}
+        </p>
+      </div>
     </div>
   );
 }

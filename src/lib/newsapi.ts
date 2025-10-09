@@ -20,9 +20,9 @@ export async function getNewsHeadline(): Promise<IArticle[]> {
   }
 }
 
-export async function getNewsDetail(objectId: string) {
+export async function getNewsDetail(title: string) {
   try {
-    const res = await axios.get(`${BASE_URL}/${objectId}`);
+    const res = await axios.get(`${BASE_URL}/${title}`);
     return res.data;
   } catch (error) {
     console.error(error);

@@ -1,24 +1,19 @@
-import * as React from "react";
+import type { Metadata } from "next";
 
-export interface IBlogSlugLayoutProps {
-  children: React.ReactNode;
-}
-
-type PropsParams = {
-  params: Promise<{ slug: string }>;
-};
-
-// Dynamic Metadata
 export async function generateMetadata({
   params,
-}: PropsParams): Promise<Metadata> {
-  const slug = (await params).slug;
-
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   return {
-    title: slug,
+    title: params.slug.replace(/-/g, " "),
   };
 }
 
-export default function BlogSlugLayout(props: IBlogSlugLayoutProps) {
-  return <div>{props.children}</div>;
+export default function BlogSlugLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
 }

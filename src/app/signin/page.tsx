@@ -27,7 +27,6 @@ export default function SignIn() {
       await loginWithEmail(email, password);
       const storedUser = useAuthStore.getState().user;
       if (storedUser) {
-        // set cookie prototipe (simple)
         const tokenValue = encodeURIComponent(
           storedUser.email ?? storedUser.id ?? "1"
         );
