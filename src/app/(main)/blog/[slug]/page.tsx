@@ -1,5 +1,5 @@
 import { getNewsHeadline, getNewsDetail } from "@/lib/newsapi";
-import Link from "next/link";
+import Image from "next/image";
 
 interface BlogDetailProps {
   params: { slug: string };
@@ -30,11 +30,9 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
         </h2>
 
         {data.imgurl && (
-          <img
-            src={data.imgurl}
-            alt={data.title}
-            className="w-full max-h-[400px] object-cover rounded-xl mb-6 shadow-md"
-          />
+          <div className="relative w-full h-[400px] max-h-[400px] object-cover rounded-xl mb-6 shadow-md">
+            <Image src={data.imgurl} alt={data.title} fill></Image>
+          </div>
         )}
 
         <p className="text-xs text-gray-500 italic mb-4 text-right">

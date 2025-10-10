@@ -3,6 +3,20 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+interface IUser {
+  name: { first: string };
+  picture: { large: string };
+  objectId: number;
+  role: string;
+}
+
+interface IMember {
+  name: string;
+  photo: string;
+  objectId: number;
+  role: string;
+}
+
 export default function Teams() {
   const [member, setMember] = useState([]);
   useEffect(() => {
@@ -19,13 +33,12 @@ export default function Teams() {
       });
       const data = await response.json();
       setMember(
-        data.results.map((user: any, index: number) => {
+        data.results.map((user: IUser, index: number) => {
           return {
-            name: `${user.name.first} ${user.name.last}`,
+            name: user.name.first,
             photo: user.picture.large,
-            country: user.location.country,
-            role: roles[index],
             objectId: index,
+            role: roles[index],
           };
         })
       );
@@ -42,18 +55,21 @@ export default function Teams() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
-        {member.map((user: any) => (
+        {member.map((user: IMember) => (
           <div
             key={user.objectId}
-            className="bg-white h-100 flex flex-col gap-5 items-center p-4 justify-center rounded-md shadow hover:scale-105 transition"
+            className=" h-100 flex flex-col gap-5 items-center p-4 justify-center rounded-md shadow hover:scale-105 transition"
           >
-            <img src={user.photo} className="rounded-full shadow-xl"></img>
+            <Image
+              src={user.photo}
+              alt="Director Teams"
+              width={200}
+              height={350}
+              className="rounded-[20px] shadow-xl"
+            ></Image>
             <p className="font-medium text-2xl tracking-wide">{user.name}</p>
             <p className="rounded bg-slate-100/70 px-5 py-0.5 font-extralight">
               {user.role}
-            </p>
-            <p className="text-center text-sm font-light text-black/70 tracking-wide">
-              {user.bio}
             </p>
           </div>
         ))}
